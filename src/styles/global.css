@@ -3,5 +3,14 @@
 @tailwind utilities;
 
 * {
-    font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(
+    67.08deg,
+    #1e46a3 0%,
+    #000000 48.94%,
+    #c12a23 99.97%
+  );
 }
