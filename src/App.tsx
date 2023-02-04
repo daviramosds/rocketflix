@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "./components/Button";
+import { Code } from "./components/Code";
 import { Header } from "./components/Header";
+import { Movie } from "./components/Movie";
 import { api } from "./lib/axios";
 
 export const API_KEY = import.meta.env.VITE_API_KEY;
@@ -19,7 +21,6 @@ export function App() {
         `latest?api_key=${API_KEY}&language=pt-BR`
       );
       let id = await Math.trunc(Math.random() * latest.id);
-      id = 2
 
       const { data: movie } = await api.get(
         `${id}?api_key=${API_KEY}&language=pt-BR`
@@ -37,9 +38,7 @@ export function App() {
 
       setAplicationStarted(true);
 
-      console.log(movie.backdrop_path);
     } catch (error) {
-      console.log("erro");
       setTitle("");
       setDescription("");
       setPreview("");
@@ -52,26 +51,10 @@ export function App() {
       <Header />
 
       {aplicationStarted && !error && (
-        <div className="flex items-center gap-8 my-12">
-          <img src={preview} className="w-44 h-60 bg-slate-700 object-cover" />
-          <div className="flex flex-col gap-4">
-            <p className="font-bold text-white text-lg">{title}</p>
-            <p className="text-white text-sm">{description}</p>
-          </div>
-        </div>
+        <Movie title={title} description={description} preview={preview} />
       )}
 
-      {error && (
-        <div className="flex items-center gap-8 my-12">
-          <img
-            src="https://images.pexels.com/photos/4974912/pexels-photo-4974912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            className="w-44 h-60 bg-slate-700 object-cover"
-          />
-          <p className="font-bold text-white text-lg">
-            Ops, hoje não é dia de assistir filme. Bora codar! 🚀
-          </p>
-        </div>
-      )}
+      {error && <Code />}
 
       <Button onClick={getMovie} />
 
