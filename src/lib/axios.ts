@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-    baseURL: "base_url"
+    baseURL: "https://api.themoviedb.org/3/movie/"
 })
